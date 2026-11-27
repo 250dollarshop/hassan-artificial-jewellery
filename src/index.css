@@ -1,0 +1,225 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --bg-ivory: #FFFBF5;
+    --bg-champagne: #F6EBD9;
+    --bg-surface: #FFFFFF;
+    --bg-burgundy: #3A0A12;
+    --bg-burgundy-rich: #5A0F1C;
+    --text-heading: #2B1B14;
+    --text-body: #6B5B53;
+    --border-warm: #EADFCB;
+    --ruby: #8B0A1A;
+    --ruby-hover: #6E0714;
+    --gold-light: #F4D58D;
+    --gold-mid: #C9A24B;
+    --gold-deep: #B8862B;
+  }
+
+  .dark {
+    --bg-ivory: #1D090E;
+    --bg-champagne: #290E15;
+    --bg-surface: #33131C;
+    --bg-burgundy: #16060A;
+    --bg-burgundy-rich: #2E0A13;
+    --text-heading: #FBF4E9;
+    --text-body: #DEC9C0;
+    --border-warm: #562630;
+    --ruby: #A91527;
+    --ruby-hover: #8B0A1A;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Jost', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-ivory);
+    color: var(--text-body);
+    overflow-x: clip;
+  }
+
+  body {
+    background-color: var(--bg-ivory);
+    color: var(--text-body);
+    line-height: 1.6;
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  }
+}
+
+.font-editorial {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Luxury Gold Gradient & Shimmer */
+.bg-gold-gradient {
+  background: linear-gradient(135deg, #F4D58D 0%, #C9A24B 52%, #B8862B 100%);
+}
+
+.bg-gold-gradient-hover:hover {
+  background: linear-gradient(135deg, #F8E0A5 0%, #D4AF5A 52%, #C99535 100%);
+}
+
+.text-gold-shimmer {
+  background: linear-gradient(
+    110deg,
+    #B8862B 0%,
+    #C9A24B 25%,
+    #FFF3C4 48%,
+    #C9A24B 72%,
+    #B8862B 100%
+  );
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gold-shimmer 4.5s linear infinite;
+}
+
+.dark .text-gold-shimmer {
+  background: linear-gradient(
+    110deg,
+    #C9A24B 0%,
+    #F4D58D 28%,
+    #FFF8DE 50%,
+    #F4D58D 72%,
+    #C9A24B 100%
+  );
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes gold-shimmer {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+@keyframes shine-sweep {
+  0% { transform: translateX(-140%) skewX(-20deg); }
+  100% { transform: translateX(240%) skewX(-20deg); }
+}
+
+.shine-sweep-parent {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-sweep-parent::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: 45%;
+  background: linear-gradient(90deg, transparent, rgba(255, 251, 245, 0.42), transparent);
+  transform: translateX(-140%) skewX(-20deg);
+  pointer-events: none;
+}
+
+.shine-sweep-parent:hover::after {
+  animation: shine-sweep 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Marquee / Product Parade */
+@keyframes marquee-rtl {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+@keyframes marquee-ltr {
+  0% { transform: translate3d(-50%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+.animate-parade {
+  display: flex;
+  width: max-content;
+  animation: marquee-rtl 42s linear infinite;
+}
+
+.animate-parade:hover {
+  animation-play-state: paused;
+}
+
+.animate-marquee-ltr {
+  display: flex;
+  width: max-content;
+  animation: marquee-ltr 32s linear infinite;
+}
+
+.animate-marquee-rtl {
+  display: flex;
+  width: max-content;
+  animation: marquee-rtl 32s linear infinite;
+}
+
+@keyframes float-bob {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50% { transform: translate3d(0, -10px, 0) rotate(1.2deg); }
+}
+
+.animate-float-bob {
+  animation: float-bob 5.5s ease-in-out infinite;
+}
+
+@keyframes orbit-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-orbit-slow {
+  animation: orbit-spin 18s linear infinite;
+}
+
+.animate-orbit-reverse {
+  animation: orbit-spin 24s linear infinite reverse;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.65; }
+  100% { transform: scale(1.65); opacity: 0; }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2.2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+/* Scrollbar styling */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Focus visibility */
+:focus-visible {
+  outline: 2px solid #C9A24B;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-parade,
+  .animate-marquee-ltr,
+  .animate-marquee-rtl,
+  .animate-float-bob,
+  .animate-orbit-slow,
+  .animate-orbit-reverse,
+  .animate-pulse-ring,
+  .text-gold-shimmer {
+    animation: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
